@@ -65,9 +65,9 @@ while (ganadorTorneo == " "){
     //Se asigna el ganador o empate del juego n 
     let ganador = juego1.determinaGanador();
     
-    //Aumenta el numero del juego 
-    numJuego ++;
-
+    //Imprime el ganador en cada juego
+    console.log("El ganador del juego "+ numJuego +" es: " + ganador);
+    
     //Si Pedro gana un juego
     if(ganador == "Pedro Sánchez"){
         ganoJ1++; //aumenta contador
@@ -79,9 +79,15 @@ while (ganadorTorneo == " "){
     //Si se gano el torneo se asigna el ganador FINAL
     if(ganoJ1 == 3){
         ganadorTorneo = "Pedro Sánchez";
+        break;
     }else if (ganoJ2 == 3){
         ganadorTorneo = "Antonio Ramírez";
+        break;
     }
+
+    //Aumenta el numero del juego 
+    numJuego ++;
 }
-console.log("El ganador del torneo es "+ ganadorTorneo);
+
+console.log("\nEl ganador del torneo es "+ ganadorTorneo);
 console.log("Se jugaron "+ numJuego +" juegos");
