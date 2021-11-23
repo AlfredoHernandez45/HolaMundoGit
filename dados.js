@@ -2,7 +2,7 @@
  * -------------------
  * |CÓDIGO JAVASCRIPT|
  * -------------------
- * 
+ * Juegos De Dados
  * Determinar el primer ganador de 3 juegos y cuantos juegos hubo
  * 
  */
