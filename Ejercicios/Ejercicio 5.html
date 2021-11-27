@@ -16,13 +16,15 @@
  * 
  */
 
-var body = document.getElementsByTagName("body")[0];
-var materias; 
+var materias;
 var alumnos;
 var calificacion;
 
-let tabla = document.createElement("table");
-let rows, reg, titulos;
+var body = document.getElementsByTagName("body")[0];
+var alumnos = document.getElementById("Alumnos");// trabaja sobre el eje Y
+var materias = document.getElementById("Materias");// trabaja sobre el eje X
+var tabla = document.createElement("table");
+var filas, celdas, titulos;
 
 
 //materias = parseInt(prompt('Ingresar el numero total de materias',''));
@@ -36,11 +38,52 @@ alumnos = parseInt(prompt('Ingresar el numero de estudiantes',''));
 var materiaArray = new Array(materias);
 var alumnosArray = new Array(alumnos);
 
+createTabla();
 ingresoCalificaion(alumnos);
 //document.write(materiaArray);
 aprobados(materiaArray);
 reprobados(materiaArray);
 promedio();
+
+function createTabla(){
+  //rows
+    //filas = document.createElement("tr");
+  //reg  
+    //celdas = document.createElement("td");
+
+    for(var j=0; j<=(materias+2); j++){
+        filas = document.createElement("tr");
+        filas.setAttribute("placeholder", "Materia");
+        
+        for(var i=0; i<=(alumnos+1); i++){
+            titulos = document.createElement("th");
+            celdas = document.createElement("td");
+
+            //titulo de la fila de alumnos
+            if(j==0 && i==0){
+                titulos.innerHTML = "Alumnos";
+                filas.appendChild(titulos);
+            }
+            else if(j==0 && i==1){
+                titulos.innerHTML = "Materia";
+                titulos.setAttribute("coldspan",""+materias);
+                filas.appendChild(titulos);
+            }
+            else if(j>=2 && i==0){
+                celdas.innerHTML = ""+(j-1);
+                filas.appendChild(celdas);
+            }
+            else if(j>=2 && i!=0){
+                celdas.innerHTML = "<input type='number' id='valor"+j+""+i+"'>";
+                filas.appendChild(reg);
+            }
+            else if(i == (matriX+1)){
+                celdas.innerHTML = "<input type='number' value='' readonly>"
+            }
+        }
+        tabla.appendChild(filas);
+    }
+}
 
 function ingresoCalificaion (alumnos){
     
