@@ -1,0 +1,182 @@
+
+<html>
+<head>
+</head>
+<body>
+<script language="JavaScript"> 
+/**
+ * ------------
+ * Ejercicio 5
+ * ------------
+ * Elaborar un programa que lea las calificaciones de las n materias de los alumnos de un grupo.
+ * - Que calcule cúantos alumnos aprobaron.
+ * - El procentaje de aprobación.
+ * - Cuantos reprobaron.
+ * - El promedio de los reprobados.
+ * 
+ */
+
+var body = document.getElementsByTagName("body")[0];
+var materias; 
+var alumnos;
+var calificacion;
+
+let tabla = document.createElement("table");
+let rows, reg, titulos;
+
+
+//materias = parseInt(prompt('Ingresar el numero total de materias',''));
+materias = parseInt(prompt('Ingresar el numero total de materias',''));
+alumnos = parseInt(prompt('Ingresar el numero de estudiantes',''));
+
+//materias = parseInt(materias);
+//alumnos = parseInt(alumnos);
+
+//Asigna el tamanio del array
+var materiaArray = new Array(materias);
+var alumnosArray = new Array(alumnos);
+
+ingresoCalificaion(alumnos);
+//document.write(materiaArray);
+aprobados(materiaArray);
+reprobados(materiaArray);
+promedio();
+
+function ingresoCalificaion (alumnos){
+    
+    for(var i = 0; i < materiaArray.length; i++){
+        
+        //En cada posicion del nuevo array guardamos un nuevo array
+        materiaArray[i] = new Array(alumnos);
+        
+        for(var j = 0; j < alumnos; j++){
+            //ingresar calificacion
+            calificacion = parseInt(prompt('Ingresar calificación de la Materia '+(i+1),'Alumno '+(j+1),));
+            //Metemos los datos en cada posicion
+            materiaArray[i][j] = calificacion;
+            
+        }  
+        console.log(materiaArray[i]);
+    }
+}
+
+function aprobados (materiaArray){
+    //Cuantos alumnos aprobaron
+    var numAprobado = new Array();
+    var porcAprobado = new Array();
+    //var proAprobados = new Array();
+    //var promedio = 0;
+
+    for(var i = 0; i < materiaArray.length; i++){
+        
+        var num = 0;
+        
+        for(var j = 0; j < materiaArray[i].length; j++){
+            
+            if (materiaArray[i][j] >= 70){// si aprobaron la materia
+                num++;//aumenta el numero de aprovados
+                
+            }
+            
+        }
+        //numero de aprobados en cada materia
+        numAprobado.push(num);
+        
+        //Porcentaje de aprobados por materia
+        porcAprobado.push((numAprobado[i]*100)/alumnos);
+
+        
+    }
+    //Promedio de aprobaso por materia
+    //proAprobados.push(promedio/materiaArray.length);
+
+    //document.write(numAprobado);
+    //document.write(porcAprobado);
+    //document.write(proAprobados);
+}
+
+function reprobados (materiaArray){
+    //Cuantos alumnos aprobaron
+    var numReprobado = new Array();
+    var porcReprobado = new Array();
+    //var proReprobados = new Array();
+    //var promedio = 0;
+
+    for(var i = 0; i < materiaArray.length; i++){
+        
+        var num = 0;
+        
+        for(var j = 0; j < materiaArray[i].length; j++){
+            
+            if (materiaArray[i][j] < 70){// si reprobaron la materia
+                num++;
+
+            }
+            
+        }
+        //numero de reprobados en cada materia
+        numReprobado.push(num);
+        
+        //Porcentaje de reprobados por materia
+        porcReprobado.push((numReprobado[i]*100)/alumnos);
+
+    }
+    //Promedio de aprobaso por materia
+    //proReprobados.push(promedio/materiaArray.length);
+
+    //document.write(proReprobados);
+    //document.write(numReprobado);
+    //document.write(porcReprobado);
+    //Porcentaje de aprobacion
+}
+
+function promedio(){
+    var proAprobados = new Array();
+    var proReprobados = new Array();
+    var promedioG = new Array();
+    var promedio = 0;
+
+    for(var i = 0; i < materiaArray.length; i++){
+        var proA = 0;
+        var proB = 0;
+
+        for(var j = 0; j < materiaArray[i].length; j++){
+            
+            //promedio de todos los alumnos
+            promedio += materiaArray[i][j];
+            
+            //promedio aprovatorio de cada alumno
+            if (materiaArray[i][j] >= 70){
+                proA += materiaArray[i][j];
+            }//promedio reprovatorio de cada alumno
+            else proB += materiaArray[i][j];
+            
+        }
+    }
+    
+    //promedio de cada alumno
+    promedioG.push(promedio/materiaArray.length);
+    console.log("Promedio de cada alumno: "+ promedioG);
+    //promedio aprovatorio de cada alumno
+    proAprobados.push(proA/materiaArray.length);
+    //promedio reprovatorio de cada alumno
+    proReprobados.push(proB/materiaArray.length); 
+
+    //Calcular el promedio grupal
+    var promedioGrupal = 0;
+    for(var i = 0; i < promedioG.length; i++){
+        promedioGrupal += promedioG[i];//Suma de promedios de cada alumno
+        console.log("Promedio grupal "+promedioGrupal);
+    }
+
+    //Obtencion del promedio grupal
+    promedioG.push(promedioGrupal/alumnos);
+
+    document.writeln("Promedio aprovatorio: "+proAprobados);
+    document.writeln("Promedio reprovatorio: "+proReprobados);
+    document.writeln("Promedio grupal: "+promedioG);
+}
+
+</script>
+</body>
+</html>
