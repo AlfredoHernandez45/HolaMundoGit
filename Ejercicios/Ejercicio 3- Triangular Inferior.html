@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3: Triangulo Inferior</title>
+</head>
+
+<body>
+    
+    <p>------------</p>
+    <p> Ejercicio 3 </p>
+    <p>------------</p>
+    <p>Ingresar el tamaño de la matriz</p>
+    
+    <input type="number" name="size" id="size" min="1" value="1"><br><br>
+    
+    <button type="button" onclick="createMat()">Crear Matriz</button>
+
+    <script>
+
+        function createMat() {
+
+            //obtenemos el tamanio de la matriz
+            var sizeMat = document.getElementById("size").value;
+            //obtenemos el body
+            var body = document.getElementsByTagName("body")[0];
+            //creamos el elemento tabla
+            var tabla = document.createElement("tabla");
+            var filas;
+            var columnas;
+            var textoTabla;
+
+            //crear la matriz
+            for (var i = 0; i < sizeMat; i++) {
+                //crear filas
+                filas = document.createElement("tr");
+
+                for (var j = 0; j < sizeMat; j++) {
+                    //crear columnas
+                    columnas = document.createElement("td");
+                    
+                    //creamos las celdas
+                    textoTabla = document.createElement("input");
+                    textoTabla.setAttribute("value", 0);
+                    textoTabla.setAttribute("id", "matriz"+i+""+j);
+                    textoTabla.setAttribute("type", "number");
+                    columnas.appendChild(textoTabla);
+                    filas.appendChild(columnas);
+                
+                }//fin de For
+                tabla.appendChild(filas);
+            }
+
+            body.innerHTML = "";//deja en blando el body html
+
+            tabla.setAttribute("border","2");
+            ///tabla.setAttribute("text-align", "center");
+            //tabla.setAttribute("align","center");
+            //tabla.setAttribute("border-collapse", "collapse");
+            body.appendChild(tabla);//muestra la tabla 
+
+            var botonComprobar = document.createElement("button");
+            botonComprobar.innerHTML += "Comprobar Tabla";
+            botonComprobar.setAttribute("onclick","comprobacion("+sizeMat+")");
+            body.appendChild(botonComprobar);//muestra el boton
+        }
+
+        function comprobacion(sizeMat){
+            //crear array con el tamaño de la matriz
+            var matriz = new Array(sizeMat);
+            
+            //llenamos la matriz 
+            for (var i = 0; i < matriz.length; i++) {
+                matriz[i] = new Array(sizeMat);
+
+                for (var j = 0; j < matriz.length; j++) {
+                    matriz[i][j] = document.getElementById("matriz"+i+j).value;
+                    
+                }//Fin de For
+                
+            }//Fin de For
+
+            var trianguloInferior = 0;
+            var trianguloSuperior = 0;
+            //Comprobamos que es un triangulo infrior
+            for (var i = 0; i < matriz.length; i++) {//filas
+
+                for (var j = 0; j < matriz.length; j++) {//columnas
+
+                    if (j>i){//si es triangular 
+                        if(matriz[i][j] == 0){//si el valor es 0
+                            
+                            trianguloInferior += 0;//suma un 0
+
+                        }//fin de if
+                        else trianguloInferior += 1;// suma un 1
+
+                    }//Fin de if
+                    else if(matriz[i][j] != 0){//si el valor es diferente al 0
+                        trianguloSuperior += 0;
+                    }
+                    else trianguloSuperior += 1;
+                }//Fin de for j
+                
+            }//Fin de for i
+
+            var respuesta;
+            
+            if (trianguloInferior == 0 && trianguloSuperior == 0) {
+                respuesta = alert('La matriz SI es trinagular inferior');
+            }
+            else respuesta = alert('La matriz NO es trinagular inferior');
+
+        }
+
+
+    </script>
+</body>
+
+</html>
