@@ -45,55 +45,35 @@ class Jugador{
     }
     
     
-}
+}//Fin de CLASE JUGADOR
 
 class JuegoDados{
     
     constructor(numeroJuego, j1, j2){
         this.numeroJuego = numeroJuego;
-        this.jugador1 = j1;
-        this.jugador2 = j2;
+        this.jugador1 = new Jugador(j1.name);
+        this.jugador2 = new Jugador(j2.name);
     }
     
-
-    set tirarDados (jugador1) {
-        jugador1 = Math.round((Math.random() * 5) + 1);
-        /** 
+    tirarDados(){
+        this.jugador1.caraDado1 = Math.round((Math.random() * 5) + 1);
         this.jugador1.caraDado2 = Math.round((Math.random() * 5) + 1);
         this.jugador2.caraDado1 = Math.round((Math.random() * 5) + 1);
         this.jugador2.caraDado2 = Math.round((Math.random() * 5) + 1);
-        */
-    }
-
-    get tirarDados(){
-        this.jugador1 = (Math.floor(Math.random()*(6-1))+1);
-        return this.jugador1;
+        //console.log(this.jugador1.caraDado1);
         
     }
 
     determinaGanador () {
         if ( ((this.jugador1.caraDado1 + this.jugador1.caraDado2) == 7)
             && ((this.jugador2.caraDado1 + this.jugador2.caraDado2) != 7) )
-            return this.jugador1
+            return this.jugador1.name;
         else if ( ((this.jugador2.caraDado1 + this.jugador2.caraDado2) == 7)
-            && ((this.jugador1.caraDado1 + this.jugador2.caraDado1) != 7) )
-            return this.jugador2
+            && ((this.jugador1.caraDado1 + this.jugador1.caraDado2) != 7) )
+            return this.jugador2.name;
         else return null;
     }
-}
-
-var pedro = new Jugador("Pedro Sánchez");
-var antonio = new Jugador("Antonio Ramírez");
-var juegos = new JuegoDados(1, pedro, antonio);
-pedro.caraDado1 = juegos.tirarDados;
-console.log(pedro.caraDado1);
-
-//console.log(juegos);
-
-//pedro.caraDado1 = 2;
-
-//console.log(pedro.name);
-//console.log(pedro.caraDado1);
+}//Fin de CLASE JUEGOS
 
 /* Programar la clase que represente al torneo
 clase torneoDados
@@ -107,12 +87,99 @@ clase torneoDados
     función resultado     //hacer privado y métodos getter y setter
 */
 
+class torneoDados{
+    #juegosGanadosJugador1 = 0;
+    #juegosGanadosJugador2 = 0;
 
+    #setjuegoGanadoJugador1(n){
+        this.#juegosGanadosJugador1 = n;
+    }
+    #setjuegosGanadosJugador2(n){
+        this.#juegosGanadosJugador2 = n;
+    }
+    set juegosGanadosJugador1(n){
+        this.#setjuegoGanadoJugador1(n);//Hacer privado y sus métodos getter y setter
+        
+    }
+    set juegosGanadosJugador2(n){
+        this.#setjuegosGanadosJugador2(n);//Hacer privado y sus métodos getter y setter
+        
+    }
 
-//Usar clases para demostrar su funcionamiento
-/*
-    Simular un torneo de dados.
-    El torneo se juega hasta que un jugador gana 3 juegos.
-    Un jugador gana un juego cuando la suma de los 2 dados es 7 y el otro no obtiene un 7.
-    En caso de que en un juego ninguno de los jugadores obtenga 7, se declara empate
-*/
+    //geters
+    #getjuegoGanadoJugador1(){
+        return this.#juegosGanadosJugador1;
+    }
+
+    #getjuegosGanadosJugador2(){
+        return this.#juegosGanadosJugador2;
+    }
+    get juegosGanadosJugador1(){
+        return this.#getjuegoGanadoJugador1();
+    }
+    get juegosGanadosJugador2(){
+        return this.#getjuegosGanadosJugador2();
+    }
+    //
+    constructor (){
+        
+        this.jugadas = new Array();
+    }
+
+    crear(j1, j2){
+        this.jugador1 = new Jugador(j1);
+        this.jugador2 = new Jugador(j2);
+
+    }
+
+    jugar(cont){
+        
+        this.jugadas.push(new JuegoDados(cont+1, this.jugador1, this.jugador2));
+
+        this.jugadas[cont].tirarDados();
+        
+        var ganador = this.jugadas[cont].determinaGanador()
+
+        if(ganador == this.jugador1.name){
+            this.juegosGanadosJugador1++;
+            console.log("El ganador del juego "+ (cont+1) +" es: " + this.jugador1.name);
+        }
+        else if(ganador == this.jugador2.name){
+            console.log("El ganador del juego "+ (cont+1) +" es: " + this.jugador2.name);
+            this.juegosGanadosJugador2++;
+        }
+        
+    }
+
+    #resultado(){
+        if(this.juegosGanadosJugador1 == 3){
+            return this.jugador1.name;
+            
+        }
+        else if(this.juegosGanadosJugador2 == 3){
+            return this.jugador2.name;
+            
+        }
+    }
+    get resultado(){
+        return this.#resultado();
+    }
+
+    set resultado(n){
+        this.#resultado = n;
+    }
+}
+var torneo = new torneoDados();
+torneo.crear("Pedro Sánchez", "Antonio Ramírez");
+
+var cont = 0;
+var ganadorTorneo = " ";
+
+while(ganadorTorneo == " "){
+    torneo.jugar(cont);
+    if(torneo.resultado != undefined){
+        ganadorTorneo = torneo.resultado;
+        console.log("\nEl ganador del torneo es "+ ganadorTorneo);
+    }
+    cont++;
+}
