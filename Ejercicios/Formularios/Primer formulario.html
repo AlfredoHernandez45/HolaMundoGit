@@ -30,15 +30,23 @@ Datos paravalidar con expresiones regulares:
     <h2>Formulario para hora del día</h2>
 
     <form name="Horario"   action="Datos Personal.html">
-        <label for="hora">Ingrese la hora:</label><br>
-        <input type="text" id="hora" name="hora" value="HH:MM:SS"><br>
+        <label for="hora">Ingrese la hora: ejemplo: HH:MM:SS</label><br>
+        <input type="text" id="hora" ><br><br>
         
         <label for="tipo">24-Horas o 12-Horas</label><br>
         <input type="text" id="tipoHorario" name="tipoHorario" value="24 o 12"><br><br>
         
-        <input type="button" value="Continuar">
+        <input type="button" value="Continuar" onclick="verificar()">
     </form> 
 
-    <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+    <script language="javascript">
+        function verificar(){
+            //agregar expresion regular
+            var hora = document.Horario.hora.value;
+            const exRegular12 = /^(?:0?[1-9]|1[0-2]):[0-5][0-9]:[0-5][0-9]\s?(?:[aApP](\.?)[mM]\1)?$/;
+            alert(exRegular12.test(hora));
+        }
+    </script>
+    
 </body>
 </html>
