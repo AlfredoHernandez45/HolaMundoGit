@@ -1,0 +1,44 @@
+<!-- Instrucciones:
+    Cree un formulario con 2 campos para captura de datos y un botón que llame a una función 
+    que haga la validación de los datos introducidos. 
+    Adjunte información antes de cada campo de texto, 
+    sobre las reglas para generar el dato válido correspondiente. Cree una función en JavaScript 
+    que procese el formulario en caso de que la validación sea exitosa y muestre una página HTML
+    con sus datospersonales y de esta tarea.
+    Los datos a validar serán los asignados  por  el  docente,  los cuáles serán enviados en  un  correo  electrónico.
+    
+    Si  es  necesario, investigue las reglas que debe seguir para generar datos asignados.
+    Suba sus códigos en un repositorio git. 
+    Cree un documento con hoja de presentación, 
+    pegue sus códigos y capturas de pantalla demostrando su funcionamiento. 
+    Al final de documento agregue el linka su repositorio.
+    Adjuntesu documento a la tarea.
+
+Datos paravalidar con expresiones regulares:
+
+8.- Hora del día con minutos y segundos -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8: hora del dia con minutos y segundos</title>
+</head>
+<body>
+    <h2>Formulario para hora del día</h2>
+
+    <form name="Horario"   action="Datos Personal.html">
+        <label for="hora">Ingrese la hora:</label><br>
+        <input type="text" id="hora" name="hora" value="HH:MM:SS"><br>
+        
+        <label for="tipo">24-Horas o 12-Horas</label><br>
+        <input type="text" id="tipoHorario" name="tipoHorario" value="24 o 12"><br><br>
+        
+        <input type="button" value="Continuar">
+    </form> 
+
+    <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+</body>
+</html>
